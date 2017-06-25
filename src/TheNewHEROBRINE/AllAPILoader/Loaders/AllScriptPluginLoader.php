@@ -9,11 +9,11 @@ use pocketmine\Server;
 
 class AllScriptPluginLoader extends ScriptPluginLoader {
 
-    public $server2;
+    private $server;
 
     public function __construct(Server $server) {
         parent::__construct($server);
-        $this->server2 = $server;
+        $this->server = $server;
     }
 
     public function getPluginDescription($file) {
@@ -44,10 +44,10 @@ class AllScriptPluginLoader extends ScriptPluginLoader {
         }
         if ($insideHeader) {
             $description = new PluginDescription($data);
-            if (!$this->server2->getPluginManager()->getPlugin($description->getName()) instanceof Plugin and !in_array($this->server2->getApiVersion(), $description->getCompatibleApis())) {
+            if (!$this->server->getPluginManager()->getPlugin($description->getName()) instanceof Plugin and !in_array($this->server->getApiVersion(), $description->getCompatibleApis())) {
                 $api = (new \ReflectionClass("pocketmine\plugin\PluginDescription"))->getProperty("api");
                 $api->setAccessible(true);
-                $api->setValue($description, [$this->server2->getApiVersion()]);
+                $api->setValue($description, [$this->server->getApiVersion()]);
                 return $description;
             }
         }
