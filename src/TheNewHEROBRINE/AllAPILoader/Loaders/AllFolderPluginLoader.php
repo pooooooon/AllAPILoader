@@ -16,7 +16,7 @@ class AllFolderPluginLoader extends FolderPluginLoader {
         $this->server = $server;
     }
 
-    public function getPluginDescription($file) {
+    public function getPluginDescription(string $file) {
         if (is_dir($file) and file_exists($file . "/plugin.yml")) {
             $yaml = @file_get_contents($file . "/plugin.yml");
             if ($yaml != "") {

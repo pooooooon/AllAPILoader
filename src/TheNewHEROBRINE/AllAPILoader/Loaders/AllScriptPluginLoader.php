@@ -16,7 +16,7 @@ class AllScriptPluginLoader extends ScriptPluginLoader {
         $this->server = $server;
     }
 
-    public function getPluginDescription($file) {
+    public function getPluginDescription(string $file) {
         $content = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         $data = [];
